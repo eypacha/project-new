@@ -76,22 +76,8 @@ new vite my-vite-app --template=vue
 
 Project-new supports a wide range of project types:
 
-- Angular
-- Astro
-- Django
-- Flask
-- Gatsby
-- Laravel
-- Marko
-- Next.js
-- Nuxt
-- Payload
-- React
-- Rails
-- Svelte
-- Spring
-- Vite
-- Vue
+[Angular](https://angular.io/), [Astro](https://astro.build/), [Django](https://www.djangoproject.com/), [Flask](https://flask.palletsprojects.com/), [Gatsby](https://www.gatsbyjs.com/), [Laravel](https://laravel.com/), [Marko](https://markojs.com/), [Next.js](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Payload](https://payloadcms.com/), [React](https://reactjs.org/), [Rails](https://rubyonrails.org/), [Svelte](https://svelte.dev/), [Spring](https://spring.io/), [Vite](https://vitejs.dev/), [Vue](https://vuejs.org/)
+
 
 ## Customization
 
