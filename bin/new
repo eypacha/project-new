@@ -22,7 +22,7 @@ PROJECT_TYPES=("angular" "astro" "django" "flask" "gatsby" "laravel" "marko" "ne
 
 # Declare an array for commands
 COMMANDS=(
-  "ng new"
+  "ng new [app-name]"
   "yarn create astro [app-name]"
   "django-admin startproject [app-name]"
   "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask"
