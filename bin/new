@@ -16,25 +16,25 @@ else
 fi
 
 # Declare a simple array for project types
-PROJECT_TYPES=("vite" "nuxt" "laravel" "react" "angular" "django" "flask" "rails" "spring" "vue" "gatsby" "svelte" "next" "marko" "payload")
+PROJECT_TYPES=("angular" "django" "flask" "gatsby" "laravel" "marko" "next" "nuxt" "payload" "react" "rails" "svelte" "spring" "vite" "vue")
 
 # Declare an array for commands
 COMMANDS=(
-  "yarn create vite"
-  "npx nuxi init"
-  "composer create-project --prefer-dist laravel/laravel"
-  "npx create-react-app"
   "ng new"
-  "django-admin startproject [app-name]compos"
+  "django-admin startproject [app-name]"
   "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask"
-  "rails new"
-  "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]"
-  "vue create"
   "npx gatsby new"
-  "npx degit sveltejs/template"
-  "npx create-next-app"
+  "composer create-project --prefer-dist laravel/laravel"
   "npx create-marko [app-name]"
+  "npx create-next-app"
+  "npx nuxi init"
   "npx create-payload-app -n [app-name] [arguments]"
+  "npx create-react-app"
+  "rails new"
+  "npx degit sveltejs/template"
+  "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]"
+  "yarn create vite"
+  "vue create"
 )
 
 # Declare a variable for usage message

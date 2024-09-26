@@ -76,21 +76,21 @@ new django my-django-project --template=https://github.com/example/django-templa
 
 Project-new supports a wide range of project types:
 
-- Vite
-- Nuxt
-- Laravel
-- React
 - Angular
 - Django
 - Flask
-- Rails
-- Spring
-- Vue
 - Gatsby
-- Svelte
-- Next.js
+- Laravel
 - Marko
+- Next.js
+- Nuxt
 - Payload
+- React
+- Rails
+- Svelte
+- Spring
+- Vite
+- Vue
 
 ## Customization
 
