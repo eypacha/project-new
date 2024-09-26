@@ -1,29 +1,51 @@
-# Proyect-new
+# Project-new
 
 ## Description
-Proyect-new is a versatile Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
+Project-new is a versatile Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
 
 ## Installation
 
+Follow these steps to install and set up project-new:
+
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/proyect-new.git
+   ```bash
+   git clone https://github.com/eypacha/project-new.git
    ```
 
 2. Make the script executable:
-   ```
-   chmod +x proyect-new.sh
+   ```bash
+   cd project-new && chmod +x bin/new
    ```
 
-3. (Optional) Add the script to your PATH for easier access:
-   ```
-   echo 'export PATH=$PATH:/path/to/proyect-new' >> ~/.bashrc
+3. Add the script to your PATH for easier access:
+   
+   For Bash users:
+   ```bash
+   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.bashrc
    source ~/.bashrc
    ```
+   
+   For Zsh users:
+   ```bash
+   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+Now you can use the `new` command from anywhere in your terminal!
+
+### Troubleshooting
+
+If you encounter any issues:
+
+- Make sure you have the necessary permissions to execute the script.
+- If the `new` command is not recognized, try restarting your terminal or running `source ~/.bashrc` (or `source ~/.zshrc` for Zsh users) again.
+- Check that the path in your `.bashrc` or `.zshrc` file is correct.
+
+For more help, please [open an issue](https://github.com/eypacha/project-new/issues) on our GitHub repository.
 
 ## Usage
 
-The basic syntax for using Proyect-new is:
+The basic syntax for using project-new is:
 
 ```
 new [type] [app-name] [arguments...]
@@ -52,7 +74,7 @@ new django my-django-project --template=https://github.com/example/django-templa
 
 ## Supported Project Types
 
-Proyect-new supports a wide range of project types, including but not limited to:
+Project-new supports a wide range of project types, including but not limited to:
 
 - Vite
 - Nuxt
@@ -78,8 +100,8 @@ Users will be able to add their own custom templates using the `new --add-templa
 
 ## Contributing
 
-Contributions to Proyect-new are welcome! Please feel free to submit a Pull Request.
+Contributions to Project-new are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.√
