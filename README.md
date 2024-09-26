@@ -1,7 +1,7 @@
 # Project-new
 
 ## Description
-Project-new is a versatile Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
+Project-new is mu personal Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
 
 ## Installation
 
@@ -100,9 +100,9 @@ Users will be able to add their own custom templates using the `new --add-templa
 
 ## TODO
 
-[ ] Add tests for the script functionality.
-[ ] Add more project templates.
-[ ] Implement "add-template" functionality.
+- [ ] Add tests for the script functionality.
+- [ ] Add more project templates.
+- [ ] Implement "add-template" functionality.
 
 ## Contributing
 
