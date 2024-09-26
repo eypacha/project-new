@@ -77,6 +77,7 @@ new vite my-vite-app --template=vue
 Project-new supports a wide range of project types:
 
 - Angular
+- Astro
 - Django
 - Flask
 - Gatsby
