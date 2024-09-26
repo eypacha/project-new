@@ -58,8 +58,8 @@ USAGE_MESSAGE="${COLOR_NEW}new${COLOR_RESET} ${COLOR_TYPE}[type]${COLOR_RESET} $
 show_help() {
   printf "Usage: $USAGE_MESSAGE \n"
   printf "Options:\n" 
-  printf "  -h, --help         Show this help message \n"
-  printf "  -t, --templates    Show all templates \n"
+  printf "  --help, -h         Show this help message \n"
+  printf "  --templates, -t    Show all templates \n"
   printf "  --add-template     Add or override a custom template \n"
   printf "  --remove-template  Remove a custom template \n"
   exit 0

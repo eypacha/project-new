@@ -67,12 +67,12 @@ Create a new Django project with additional arguments:
 new vite my-vite-app --template=vue
 ```
 
-### Available Commands
+### Options
 
-- `new -h` or `new --help`: Display help information
-- `new -t` or `new --templates`: Show all available project templates
-- `new --add-template`: Add or override a custom template
-- `new --remove-template`: Remove a custom template
+- `--help` or `-h`: Display help information
+- `--templates` or `-t`: Show all available project templates
+- `--add-template`: Add or override a custom template
+- `--remove-template`: Remove a custom template
 
 ## Supported Project Types
 
