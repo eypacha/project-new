@@ -16,11 +16,12 @@ else
 fi
 
 # Declare a simple array for project types
-PROJECT_TYPES=("angular" "django" "flask" "gatsby" "laravel" "marko" "next" "nuxt" "payload" "react" "rails" "svelte" "spring" "vite" "vue")
+PROJECT_TYPES=("angular" "astro" "django" "flask" "gatsby" "laravel" "marko" "next" "nuxt" "payload" "react" "rails" "rust" "svelte" "spring" "vite" "vue")
 
 # Declare an array for commands
 COMMANDS=(
   "ng new"
+  "yarn create astro [app-name]"
   "django-admin startproject [app-name]"
   "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask"
   "npx gatsby new"
@@ -31,6 +32,7 @@ COMMANDS=(
   "npx create-payload-app -n [app-name] [arguments]"
   "npx create-react-app [app-name]"
   "rails new"
+  "cargo new [app-name] [arguments]"
   "npx degit sveltejs/template"
   "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]"
   "yarn create vite"
