@@ -1,5 +1,14 @@
 #!/bin/bash
 
+CONFIG_FILE="$HOME/.new"
+USER_TEMPLATES=()
+
+if [[ -f $CONFIG_FILE ]]; then
+  while IFS=: read -r name command; do
+    USER_TEMPLATES+=("$name:$command")
+  done < "$CONFIG_FILE"
+fi
+
 # Declare color variables
 if [[ $TERM == *color* ]]; then
   COLOR_NEW="\e[1;32m"
@@ -45,11 +54,14 @@ COMMANDS=(
 # Declare a variable for usage message
 USAGE_MESSAGE="${COLOR_NEW}new${COLOR_RESET} ${COLOR_TYPE}[type]${COLOR_RESET} ${COLOR_APP_NAME}[app-name]${COLOR_RESET} ${COLOR_ARGUMENTS}[arguments...]${COLOR_RESET} \n"
 
-# Update the show_help function to show only usage message
+# Declare show_help function
 show_help() {
-  printf "Usage: $USAGE_MESSAGE"
+  printf "Usage: $USAGE_MESSAGE \n"
+  printf "Options:\n" 
   printf "  -h, --help         Show this help message \n"
   printf "  -t, --templates    Show all templates \n"
+  printf "  --add-template     Add or override a custom template \n"
+  printf "  --remove-template  Remove a custom template \n"
   exit 0
 }
 
@@ -63,15 +75,27 @@ show_templates() {
   printf "Available templates:\n"
   for i in "${!PROJECT_TYPES[@]}"; do
     printf "${COLOR_TYPE}${PROJECT_TYPES[$i]}${COLOR_RESET}\t"
-
-    # Reemplazar [app-name] y [arguments] con colores usando printf
     command_colored="${COMMANDS[$i]}"
-    
     command_colored="${command_colored//\[app-name\]/${COLOR_APP_NAME}[app-name]${COLOR_RESET}}"
-    command_colored="${command_colored//\[arguments\]/${COLOR_ARGUMENTS}[arguments]${COLOR_RESET}}"
-
+    command_colored="${command_colored//\[arguments...\]/${COLOR_ARGUMENTS}[arguments...]${COLOR_RESET}}"
     printf "  ${COLOR_COMMAND}${command_colored}${COLOR_RESET}\n"
   done
+
+  if [[ -f "$CONFIG_FILE" ]]; then
+
+    if [[ -s "$CONFIG_FILE" ]]; then
+        printf "\nUser-defined templates:\n"
+        while IFS=: read -r user_template_name user_command; do
+            printf "${COLOR_TYPE}${user_template_name}${COLOR_RESET}\t"
+
+            user_command_colored="${user_command}"
+            user_command_colored="${user_command_colored//\[app-name\]/${COLOR_APP_NAME}[app-name]${COLOR_RESET}}"
+            user_command_colored="${user_command_colored//\[arguments...\]/${COLOR_ARGUMENTS}[arguments...]${COLOR_RESET}}"
+            
+            printf "  ${COLOR_COMMAND}${user_command_colored}${COLOR_RESET}\n"
+        done < "$CONFIG_FILE"
+    fi
+  fi
   exit 0
 }
 
@@ -80,15 +104,71 @@ if [[ "$1" == "-t" || "$1" == "--templates" ]]; then
   show_templates
 fi
 
+add_template() {
+  printf "${COLOR_TYPE}Enter template name: ${COLOR_RESET}"
+  read -r template_name
+  printf "${COLOR_TYPE}Enter command: ${COLOR_RESET}"
+  read -r command
+
+  if [[ -n "$template_name" && -n "$command" ]]; then
+    # Replace the template if it already exists, otherwise append it
+    sed -i.bak "/^$template_name:/d" "$CONFIG_FILE"  # Remove existing template
+    printf "$template_name:$command\n" >> "$CONFIG_FILE"  # Add new/updated template
+    printf "${COLOR_TYPE}${template_name}${COLOR_RESET} ${COLOR_NEW}template added or updated.${COLOR_RESET} \n"
+    exit 0
+  else
+    printf "${COLOR_ERROR}Error: Template name or command cannot be empty.${COLOR_RESET} \n"
+    exit 1
+  fi
+}
+
+# Check for add-template flag
+if [[ "$1" == "--add-template" ]]; then
+  add_template
+  exit 0
+fi
+
+remove_template() {
+  printf "${COLOR_TYPE}Enter template name to remove: ${COLOR_RESET}"
+  read -r template_name
+
+  if [[ -z "$template_name" ]]; then
+    printf "${COLOR_ERROR}Error: Template name cannot be empty.${COLOR_RESET}\n"
+    exit 1
+  fi
+
+  # Check if the configuration file exists
+  if [[ -f "$CONFIG_FILE" ]]; then
+    # Use sed to delete the line corresponding to the template
+    sed -i.bak "/^$template_name:/d" "$CONFIG_FILE"
+    
+    # Check if any deletion was made
+    if [[ $? -eq 0 ]]; then
+      printf "${COLOR_TYPE}${template_name}${COLOR_RESET} ${COLOR_NEW}template removed.${COLOR_RESET}\n"
+    else
+      printf "${COLOR_ERROR}Error: Template '${template_name}' not found.${COLOR_RESET}\n"
+    fi
+  else
+    printf "${COLOR_ERROR}Error: Configuration file does not exist.${COLOR_RESET}\n"
+  fi
+  exit 0
+}
+
+# Check if the remove template option was passed
+if [[ "$1" == "--remove-template" ]]; then
+  remove_template
+  exit 0
+fi
+
 # Check if enough arguments have been provided
-if [ "$#" -lt 2 ]; then
+if [ "$#" -lt 1 ]; then
   printf "Usage: $USAGE_MESSAGE\n"  # Print only the usage message
   exit 1
 fi
 
 # Variables
 TYPE=$1
-APP_NAME=$2
+APP_NAME=${2:-""}
 ARGUMENTS="${@:3}"  # Capture all arguments from the third one onward
 
 # Function to check if a command exists
@@ -124,13 +204,31 @@ check_command() {
   }
 }
 
+# Check if the project type is supported by user-defined templates first
+if [[ -f "$CONFIG_FILE" ]]; then
+    while IFS=: read -r user_template_name user_command; do
+        if [[ "$TYPE" == "$user_template_name" ]]; then
+            # Replace [app-name] and [arguments] in the user-defined command
+            command="${user_command}"
+            command="${command//\[app-name\]/$APP_NAME}"
+            command="${command//\[arguments...\]/$ARGUMENTS}"
+            # Attempt to run the command
+            if ! eval $command; then
+                # Extract the command name for error handling
+                cmd_name=$(echo "$command" | awk '{print $1}')
+                check_command "$cmd_name"  # Check if the command exists
+            fi
+            exit 0
+        fi
+    done < "$CONFIG_FILE"
+fi
 
-# Check if the project type is supported
+# Check if the project type is supported by predefined PROJECT_TYPES
 for i in "${!PROJECT_TYPES[@]}"; do
     if [[ "$TYPE" == "${PROJECT_TYPES[$i]}" ]]; then
         command="${COMMANDS[$i]}"
         command="${command//\[app-name\]/$APP_NAME}"
-        command="${command//\[arguments\]/$ARGUMENTS}"
+        command="${command//\[arguments...\]/$ARGUMENTS}"
         # Attempt to run the command
         if ! eval $command; then
           # Extract the command name for error handling
@@ -141,5 +239,5 @@ for i in "${!PROJECT_TYPES[@]}"; do
     fi
 done
 
-echo "Unsupported project type: $TYPE"
+printf "${COLOR_ERROR}Unsupported project type:${COLOR_RESET} ${COLOR_TYPE}$TYPE${COLOR_RESET}\n"
 exit 1

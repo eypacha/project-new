@@ -71,6 +71,8 @@ new vite my-vite-app --template=vue
 
 - `new -h` or `new --help`: Display help information
 - `new -t` or `new --templates`: Show all available project templates
+- `new --add-template`: Add or override a custom template
+- `new --remove-template`: Remove a custom template
 
 ## Supported Project Types
 
@@ -78,18 +80,10 @@ Project-new supports a wide range of project types:
 
 [Angular](https://angular.io/), [Astro](https://astro.build/), [Django](https://www.djangoproject.com/), [Flask](https://flask.palletsprojects.com/), [Gatsby](https://www.gatsbyjs.com/), [Laravel](https://laravel.com/), [Marko](https://markojs.com/), [Next.js](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Payload](https://payloadcms.com/), [Poem](https://docs.rs/poem), [React](https://reactjs.org/), [Rails](https://rubyonrails.org/), [Svelte](https://svelte.dev/), [Spring](https://spring.io/), [Vite](https://vitejs.dev/), [Vue](https://vuejs.org/)
 
-
-## Customization
-
-(Note: This feature is planned for future implementation)
-
-Users will be able to add their own custom templates using the `new --add-template` command. This will allow for easy expansion of the tool to support additional frameworks or custom project setups.
-
 ## TODO
 
 - [ ] Add tests for the script functionality.
 - [ ] Add more project templates.
-- [ ] Implement "add-template" functionality.
 - [ ] Add the ability to configure the preferred package manager.
 
 ## Contributing
