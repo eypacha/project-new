@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# Declare color variables
+if [[ $TERM == *color* ]]; then
+  COLOR_NEW="\e[1;32m"
+  COLOR_TYPE="\e[1;33m"
+  COLOR_APP_NAME="\e[1;34m"
+  COLOR_ARGUMENTS="\e[1;35m" 
+  COLOR_RESET="\e[0m"
+else
+  COLOR_NEW=""
+  COLOR_TYPE=""
+  COLOR_APP_NAME=""
+  COLOR_ARGUMENTS="" 
+  COLOR_RESET=""
+fi
+
+# Declare a simple array for project types
+PROJECT_TYPES=("vite" "nuxt" "laravel" "react" "angular" "django" "flask" "rails" "spring" "vue" "gatsby" "svelte" "next" "marko" "payload")
+
+# Declare an array for commands
+COMMANDS=(
+  "yarn create vite"
+  "npx nuxi init"
+  "composer create-project --prefer-dist laravel/laravel"
+  "npx create-react-app"
+  "ng new"
+  "django-admin startproject [app-name]compos"
+  "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask"
+  "rails new"
+  "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]"
+  "vue create"
+  "npx gatsby new"
+  "npx degit sveltejs/template"
+  "npx create-next-app"
+  "npx create-marko [app-name]"
+  "npx create-payload-app -n [app-name] [arguments]"
+)
+
+# Declare a variable for usage message
+USAGE_MESSAGE="${COLOR_NEW}new${COLOR_RESET} ${COLOR_TYPE}[type]${COLOR_RESET} ${COLOR_APP_NAME}[app-name]${COLOR_RESET} ${COLOR_ARGUMENTS}[arguments...]${COLOR_RESET} \n"
+
+# Update the show_help function to show only usage message
+show_help() {
+  printf "Usage: $USAGE_MESSAGE"
+  printf "  -h, --help         Show this help message \n"
+  printf "  -t, --templates    Show all templates \n"
+  exit 0
+}
+
+# Check for help flag
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  show_help
+fi
+
+# Function to show available templates
+show_templates() {
+  printf "Available templates:\n"
+  for i in "${!PROJECT_TYPES[@]}"; do
+    printf "${COLOR_TYPE}${PROJECT_TYPES[$i]}${COLOR_RESET}\t"
+
+    # Reemplazar [app-name] y [arguments] con colores usando printf
+    command_colored="${COMMANDS[$i]}"
+    
+    command_colored="${command_colored//\[app-name\]/${COLOR_APP_NAME}[app-name]${COLOR_RESET}}"
+    command_colored="${command_colored//\[arguments\]/${COLOR_ARGUMENTS}[arguments]${COLOR_RESET}}"
+
+    printf "  ${COLOR_COMMAND}${command_colored}${COLOR_RESET}\n"
+  done
+  exit 0
+}
+
+# Check for help flag
+if [[ "$1" == "-t" || "$1" == "--templates" ]]; then
+  show_templates
+fi
+
+# Check if enough arguments have been provided
+if [ "$#" -lt 2 ]; then
+  printf "Usage: $USAGE_MESSAGE\n"  # Print only the usage message
+  exit 1
+fi
+
+# Variables
+TYPE=$1
+APP_NAME=$2
+ARGUMENTS="${@:3}"  # Capture all arguments from the third one onward
+
+# Check if the project type is supported
+for i in "${!PROJECT_TYPES[@]}"; do
+    if [[ "$TYPE" == "${PROJECT_TYPES[$i]}" ]]; then
+        command="${COMMANDS[$i]}"
+        command="${command//\[app-name\]/$APP_NAME}"
+        command="${command//\[arguments\]/$ARGUMENTS}"
+        eval $command
+        exit 0
+    fi
+done
+
+echo "Unsupported project type: $TYPE"
+exit 1
