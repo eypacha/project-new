@@ -74,7 +74,7 @@ new django my-django-project --template=https://github.com/example/django-templa
 
 ## Supported Project Types
 
-Project-new supports a wide range of project types, including but not limited to:
+Project-new supports a wide range of project types:
 
 - Vite
 - Nuxt
@@ -98,10 +98,16 @@ Project-new supports a wide range of project types, including but not limited to
 
 Users will be able to add their own custom templates using the `new --add-template` command. This will allow for easy expansion of the tool to support additional frameworks or custom project setups.
 
+## TODO
+
+[ ] Add tests for the script functionality.
+[ ] Add more project templates.
+[ ] Implement "add-template" functionality.
+
 ## Contributing
 
 Contributions to Project-new are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.√
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
