@@ -1,7 +1,7 @@
 # Project-new
 
 ## Description
-Project-new is mu personal Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
+Project-new is my personal Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
 
 ## Installation
 
