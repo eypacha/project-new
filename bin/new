@@ -18,7 +18,7 @@ else
 fi
 
 # Declare a simple array for project types
-PROJECT_TYPES=("angular" "astro" "django" "flask" "gatsby" "laravel" "marko" "next" "nuxt" "payload" "react" "rails" "rust" "svelte" "spring" "vite" "vue")
+PROJECT_TYPES=("angular" "astro" "django" "flask" "gatsby" "laravel" "marko" "next" "nuxt" "payload" "poem" "react" "rails" "rust" "svelte" "spring" "vite" "vue")
 
 # Declare an array for commands
 COMMANDS=(
@@ -32,6 +32,7 @@ COMMANDS=(
   "npx create-next-app [app-name]"
   "npx nuxi init"
   "npx create-payload-app -n [app-name] [arguments...]"
+  "mkdir [app-name] && cd [app-name] cargo add poem"
   "npx create-react-app [app-name]"
   "rails new [app-name]"
   "cargo new [app-name] [arguments...]"
