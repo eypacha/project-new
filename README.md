@@ -64,7 +64,7 @@ new react my-react-app
 
 Create a new Django project with additional arguments:
 ```
-new django my-django-project --template=https://github.com/example/django-template/archive/main.zip
+new vite my-vite-app --template=vue
 ```
 
 ### Available Commands
