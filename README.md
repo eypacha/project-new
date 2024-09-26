@@ -103,6 +103,7 @@ Users will be able to add their own custom templates using the `new --add-templa
 - [ ] Add tests for the script functionality.
 - [ ] Add more project templates.
 - [ ] Implement "add-template" functionality.
+- [ ] Add the ability to configure the preferred package manager.
 
 ## Contributing
 
