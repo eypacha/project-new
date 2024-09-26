@@ -29,7 +29,7 @@ COMMANDS=(
   "npx create-next-app"
   "npx nuxi init"
   "npx create-payload-app -n [app-name] [arguments]"
-  "npx create-react-app"
+  "npx create-react-app [app-name]"
   "rails new"
   "npx degit sveltejs/template"
   "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]"
