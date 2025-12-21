@@ -50,7 +50,7 @@ if [[ "$1" == "--update" ]]; then
     echo "${COLOR_TYPE}Try running: sudo $0 --update${COLOR_RESET}"
     exit 1
   fi
-  echo -e "${COLOR_NEW}Updating project-new script...${COLOR_RESET}"
+  echo -e "${COLOR_APP_NAME}Updating project-new script...${COLOR_RESET}"
   if curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/master/bin/new -o "$0"; then
     chmod +x "$0"
     echo -e "${COLOR_NEW}project-new updated successfully!${COLOR_RESET}"
