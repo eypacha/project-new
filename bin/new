@@ -25,19 +25,19 @@ else
   COLOR_RESET=""
 fi
 
-# Self-update option
+# Self-update option (must be after color variables)
 if [[ "$1" == "--update" ]]; then
   if [ ! -w "$0" ]; then
-    echo "${COLOR_ERROR}Error: You do not have write permissions for $0.${COLOR_RESET}"
-    echo "${COLOR_TYPE}Try running: sudo $0 --update${COLOR_RESET}"
+    printf "${COLOR_ERROR}Error: You do not have write permissions for $0.${COLOR_RESET}\n"
+    printf "${COLOR_TYPE}Try running: sudo $0 --update${COLOR_RESET}\n"
     exit 1
   fi
-  echo -e "${COLOR_NEW}Updating project-new script...${COLOR_RESET}"
+  printf "${COLOR_NEW}Updating project-new script...${COLOR_RESET}\n"
   if curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/master/bin/new -o "$0"; then
     chmod +x "$0"
-    echo -e "${COLOR_NEW}project-new updated successfully!${COLOR_RESET}"
+    printf "${COLOR_NEW}project-new updated successfully!${COLOR_RESET}\n"
   else
-    echo "${COLOR_ERROR}Error: Failed to download the latest version.${COLOR_RESET}"
+    printf "${COLOR_ERROR}Error: Failed to download the latest version.${COLOR_RESET}\n"
     exit 1
   fi
   exit 0
