@@ -38,7 +38,7 @@ new vite my-vite-app --template=vue
 
 Project-new supports a wide range of project types:
 
-[Angular](https://angular.io/), [Astro](https://astro.build/), [Django](https://www.djangoproject.com/), [Flask](https://flask.palletsprojects.com/), [Gatsby](https://www.gatsbyjs.com/), [Laravel](https://laravel.com/), [Marko](https://markojs.com/), [Next.js](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Payload](https://payloadcms.com/), [Poem](https://docs.rs/poem), [React](https://reactjs.org/), [Rails](https://rubyonrails.org/), [Svelte](https://svelte.dev/), [Spring](https://spring.io/), [Vite](https://vitejs.dev/), [Vue](https://vuejs.org/)
+[AdonisJS](https://adonisjs.com/), [Angular](https://angular.io/), [Astro](https://astro.build/), [Django](https://www.djangoproject.com/), [Express](https://expressjs.com/), [Fastify](https://www.fastify.io/), [Flask](https://flask.palletsprojects.com/), [Gatsby](https://www.gatsbyjs.com/), [Hono](https://hono.dev/), [Laravel](https://laravel.com/), [Marko](https://markojs.com/), [NestJS](https://nestjs.com/), [Next.js](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Payload](https://payloadcms.com/), [Poem](https://docs.rs/poem), [Qwik](https://qwik.builder.io/), [Rails](https://rubyonrails.org/), [React](https://reactjs.org/), [RedwoodJS](https://redwoodjs.com/), [Remix](https://remix.run/), [Rust](https://www.rust-lang.org/), [SolidJS](https://www.solidjs.com/), [Spring](https://spring.io/), [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), [T3](https://create.t3.gg/), [Vite](https://vitejs.dev/), [Vue](https://vuejs.org/)
 
 ## Installation
 
