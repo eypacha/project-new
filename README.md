@@ -48,7 +48,7 @@ Project-new supports a wide range of project types:
 You can install the script directly with:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/main/bin/new -o ~/bin/new
+curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/master/bin/new -o ~/bin/new
 chmod +x ~/bin/new
 ```
 
