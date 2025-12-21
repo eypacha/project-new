@@ -3,46 +3,6 @@
 ## Description
 Project-new is my personal Bash script that simplifies the process of creating new projects across various frameworks and technologies. It provides a unified command-line interface for initializing projects, making it easier to start new development work regardless of the chosen technology stack.
 
-## Installation
-
-Follow these steps to install and set up project-new:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/eypacha/project-new.git
-   ```
-
-2. Make the script executable:
-   ```bash
-   cd project-new && chmod +x bin/new
-   ```
-
-3. Add the script to your PATH for easier access:
-   
-   For Bash users:
-   ```bash
-   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.bashrc
-   source ~/.bashrc
-   ```
-   
-   For Zsh users:
-   ```bash
-   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.zshrc
-   source ~/.zshrc
-   ```
-
-Now you can use the `new` command from anywhere in your terminal!
-
-### Troubleshooting
-
-If you encounter any issues:
-
-- Make sure you have the necessary permissions to execute the script.
-- If the `new` command is not recognized, try restarting your terminal or running `source ~/.bashrc` (or `source ~/.zshrc` for Zsh users) again.
-- Check that the path in your `.bashrc` or `.zshrc` file is correct.
-
-For more help, please [open an issue](https://github.com/eypacha/project-new/issues) on our GitHub repository.
-
 ## Usage
 
 The basic syntax for using project-new is:
@@ -80,11 +40,65 @@ Project-new supports a wide range of project types:
 
 [Angular](https://angular.io/), [Astro](https://astro.build/), [Django](https://www.djangoproject.com/), [Flask](https://flask.palletsprojects.com/), [Gatsby](https://www.gatsbyjs.com/), [Laravel](https://laravel.com/), [Marko](https://markojs.com/), [Next.js](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Payload](https://payloadcms.com/), [Poem](https://docs.rs/poem), [React](https://reactjs.org/), [Rails](https://rubyonrails.org/), [Svelte](https://svelte.dev/), [Spring](https://spring.io/), [Vite](https://vitejs.dev/), [Vue](https://vuejs.org/)
 
-## TODO
+## Installation
 
-- [ ] Add tests for the script functionality.
-- [ ] Add more project templates.
-- [ ] Add the ability to configure the preferred package manager.
+
+### Quick install with curl
+
+You can install the script directly with:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/tuusuario/tu-repo/main/bin/new -o ~/bin/new
+chmod +x ~/bin/new
+```
+
+Make sure ~/bin is in your PATH.
+
+### Manual install from repository
+
+Follow these steps to install and set up project-new:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/eypacha/project-new.git
+   ```
+
+2. Make the script executable:
+   ```bash
+   cd project-new && chmod +x bin/new
+   ```
+
+3. Add the script to your PATH for easier access:
+   
+   For Bash users:
+   ```bash
+   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+   
+   For Zsh users:
+   ```bash
+   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+Now you can use the `new` command from anywhere in your terminal!
+
+For detailed help and all available options, you can run:
+
+```bash
+./new --help
+```
+
+### Troubleshooting
+
+If you encounter any issues:
+
+- Make sure you have the necessary permissions to execute the script.
+- If the `new` command is not recognized, try restarting your terminal or running `source ~/.bashrc` (or `source ~/.zshrc` for Zsh users) again.
+- Check that the path in your `.bashrc` or `.zshrc` file is correct.
+
+For more help, please [open an issue](https://github.com/eypacha/project-new/issues) on our GitHub repository.
 
 ## Contributing
 
