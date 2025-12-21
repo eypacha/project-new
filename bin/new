@@ -1,3 +1,20 @@
+# Self-update option
+if [[ "$1" == "--update" ]]; then
+  if [ ! -w "$0" ]; then
+    echo "${COLOR_ERROR}Error: You do not have write permissions for $0.${COLOR_RESET}"
+    echo "${COLOR_TYPE}Try running: sudo $0 --update${COLOR_RESET}"
+    exit 1
+  fi
+  echo -e "${COLOR_NEW}Updating project-new script...${COLOR_RESET}"
+  if curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/main/bin/new -o "$0"; then
+    chmod +x "$0"
+    echo -e "${COLOR_NEW}project-new updated successfully!${COLOR_RESET}"
+  else
+    echo "${COLOR_ERROR}Error: Failed to download the latest version.${COLOR_RESET}"
+    exit 1
+  fi
+  exit 0
+fi
 #!/bin/bash
 
 CONFIG_FILE="$HOME/.new"
@@ -75,6 +92,7 @@ show_help() {
   printf "  --templates, -t    Show all templates \n"
   printf "  --add-template     Add or override a custom template \n"
   printf "  --remove-template  Remove a custom template \n"
+  printf "  --update           Update/reinstall project-new script \n"
   exit 0
 }
 
