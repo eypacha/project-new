@@ -26,30 +26,32 @@ else
   COLOR_RESET=""
 fi
 
-# Declare a simple array for project types
-PROJECT_TYPES=("angular" "astro" "django" "flask" "gatsby" "laravel" "marko" "next" "nuxt" "payload" "poem" "react" "rails" "rust" "svelte" "spring" "vite" "vue")
 
-# Declare an array for commands
-COMMANDS=(
-  "ng new [app-name]"
-  "yarn create astro [app-name]"
-  "django-admin startproject [app-name]"
-  "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask"
-  "npx gatsby new [app-name]"
-  "composer create-project --prefer-dist laravel/laravel [app-name]"
-  "npx create-marko [app-name]"
-  "npx create-next-app [app-name]"
-  "npx nuxi init"
-  "npx create-payload-app -n [app-name] [arguments...]"
-  "mkdir [app-name] && cd [app-name] cargo add poem"
-  "npx create-react-app [app-name]"
-  "rails new [app-name]"
-  "cargo new [app-name] [arguments...]"
-  "npx degit sveltejs/template [app-name]"
-  "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]"
-  "yarn create vite [app-name]"
-  "vue create [app-name]"
-)
+
+## Function to get the command for a project type
+get_project_command() {
+  case "$1" in
+    angular)   echo "ng new [app-name]";;
+    astro)     echo "yarn create astro [app-name]";;
+    django)    echo "django-admin startproject [app-name]";;
+    flask)     echo "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask";;
+    gatsby)    echo "npx gatsby new [app-name]";;
+    laravel)   echo "composer create-project --prefer-dist laravel/laravel [app-name]";;
+    marko)     echo "npx create-marko [app-name]";;
+    next)      echo "npx create-next-app [app-name]";;
+    nuxt)      echo "npx nuxi init";;
+    payload)   echo "npx create-payload-app -n [app-name] [arguments...]";;
+    poem)      echo "mkdir [app-name] && cd [app-name] cargo add poem";;
+    react)     echo "npx create-react-app [app-name]";;
+    rails)     echo "rails new [app-name]";;
+    rust)      echo "cargo new [app-name] [arguments...]";;
+    svelte)    echo "npx degit sveltejs/template [app-name]";;
+    spring)    echo "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]";;
+    vite)      echo "yarn create vite [app-name]";;
+    vue)       echo "vue create [app-name]";;
+    *)         echo "";;
+  esac
+}
 
 # Declare a variable for usage message
 USAGE_MESSAGE="${COLOR_NEW}new${COLOR_RESET} ${COLOR_TYPE}[type]${COLOR_RESET} ${COLOR_APP_NAME}[app-name]${COLOR_RESET} ${COLOR_ARGUMENTS}[arguments...]${COLOR_RESET} \n"
@@ -70,15 +72,15 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
   show_help
 fi
 
-# Function to show available templates
+## Function to show available templates
 show_templates() {
   printf "Available templates:\n"
-  for i in "${!PROJECT_TYPES[@]}"; do
-    printf "${COLOR_TYPE}${PROJECT_TYPES[$i]}${COLOR_RESET}\t"
-    command_colored="${COMMANDS[$i]}"
+  for type in angular astro django flask gatsby laravel marko next nuxt payload poem react rails rust svelte spring vite vue; do
+    cmd=$(get_project_command "$type")
+    command_colored="${cmd}"
     command_colored="${command_colored//\[app-name\]/${COLOR_APP_NAME}[app-name]${COLOR_RESET}}"
     command_colored="${command_colored//\[arguments...\]/${COLOR_ARGUMENTS}[arguments...]${COLOR_RESET}}"
-    printf "  ${COLOR_COMMAND}${command_colored}${COLOR_RESET}\n"
+    printf "${COLOR_TYPE}${type}${COLOR_RESET}\t  ${COLOR_COMMAND}${command_colored}${COLOR_RESET}\n"
   done
 
   if [[ -f "$CONFIG_FILE" ]]; then
@@ -99,7 +101,7 @@ show_templates() {
   exit 0
 }
 
-# Check for help flag
+## Check for help flag
 if [[ "$1" == "-t" || "$1" == "--templates" ]]; then
   show_templates
 fi
@@ -122,7 +124,7 @@ add_template() {
   fi
 }
 
-# Check for add-template flag
+## Check for add-template flag
 if [[ "$1" == "--add-template" ]]; then
   add_template
   exit 0
@@ -154,24 +156,24 @@ remove_template() {
   exit 0
 }
 
-# Check if the remove template option was passed
+## Check if the remove-template option was passed
 if [[ "$1" == "--remove-template" ]]; then
   remove_template
   exit 0
 fi
 
-# Check if enough arguments have been provided
+## Check if enough arguments have been provided
 if [ "$#" -lt 1 ]; then
   printf "Usage: $USAGE_MESSAGE\n"  # Print only the usage message
   exit 1
 fi
 
-# Variables
+## Variables
 TYPE=$1
 APP_NAME=${2:-""}
 ARGUMENTS="${@:3}"  # Capture all arguments from the third one onward
 
-# Function to check if a command exists
+## Function to check if a command exists
 check_command() {
   command -v "$1" >/dev/null 2>&1 || {
     printf "${COLOR_ERROR}Error: The command '%s' is not found. Would you like to install it?${COLOR_RESET} (y/n)\n" "$1"
@@ -204,7 +206,7 @@ check_command() {
   }
 }
 
-# Check if the project type is supported by user-defined templates first
+## Check if the project type is supported by user-defined templates first
 if [[ -f "$CONFIG_FILE" ]]; then
     while IFS=: read -r user_template_name user_command; do
         if [[ "$TYPE" == "$user_template_name" ]]; then
@@ -223,21 +225,22 @@ if [[ -f "$CONFIG_FILE" ]]; then
     done < "$CONFIG_FILE"
 fi
 
-# Check if the project type is supported by predefined PROJECT_TYPES
-for i in "${!PROJECT_TYPES[@]}"; do
-    if [[ "$TYPE" == "${PROJECT_TYPES[$i]}" ]]; then
-        command="${COMMANDS[$i]}"
-        command="${command//\[app-name\]/$APP_NAME}"
-        command="${command//\[arguments...\]/$ARGUMENTS}"
-        # Attempt to run the command
-        if ! eval $command; then
-          # Extract the command name for error handling
-          cmd_name=$(echo "$command" | awk '{print $1}')
-          check_command "$cmd_name"  # Check if the command exists
-        fi
-        exit 0
+
+
+
+## Execute the command for the project type if it exists
+command=$(get_project_command "$TYPE")
+if [[ -n "$command" ]]; then
+    command="${command//\[app-name\]/$APP_NAME}"
+    command="${command//\[arguments...\]/$ARGUMENTS}"
+    # Attempt to run the command
+    if ! eval $command; then
+      # Extract the command name for error handling
+      cmd_name=$(echo "$command" | awk '{print $1}')
+      check_command "$cmd_name"  # Check if the command exists
     fi
-done
+    exit 0
+fi
 
 printf "${COLOR_ERROR}Unsupported project type:${COLOR_RESET} ${COLOR_TYPE}$TYPE${COLOR_RESET}\n"
 exit 1
