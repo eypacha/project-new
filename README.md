@@ -41,46 +41,48 @@ Project-new supports a wide range of project types:
 [AdonisJS](https://adonisjs.com/), [Angular](https://angular.io/), [Astro](https://astro.build/), [Django](https://www.djangoproject.com/), [Express](https://expressjs.com/), [Fastify](https://www.fastify.io/), [Flask](https://flask.palletsprojects.com/), [Gatsby](https://www.gatsbyjs.com/), [Hono](https://hono.dev/), [Laravel](https://laravel.com/), [Marko](https://markojs.com/), [NestJS](https://nestjs.com/), [Next.js](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Payload](https://payloadcms.com/), [Poem](https://docs.rs/poem), [Qwik](https://qwik.builder.io/), [Rails](https://rubyonrails.org/), [React](https://reactjs.org/), [RedwoodJS](https://redwoodjs.com/), [Remix](https://remix.run/), [Rust](https://www.rust-lang.org/), [SolidJS](https://www.solidjs.com/), [Spring](https://spring.io/), [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), [T3](https://create.t3.gg/), [Vite](https://vitejs.dev/), [Vue](https://vuejs.org/)
 
 ## Installation
-
-
-### Quick install with curl
-
-You can install the script directly with:
+The fastest way to install is with a single command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/master/bin/new -o ~/bin/new
-chmod +x ~/bin/new
+curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/master/install.sh | bash
 ```
 
-Make sure ~/bin is in your PATH.
+This will:
+- Create $HOME/bin if it doesn't exist
+- Download the latest script to $HOME/bin/new
+- Make it executable
+- Add $HOME/bin to your PATH if needed (for zsh or bash)
 
-### Manual install from repository
+After installation, restart your terminal or run:
 
-Follow these steps to install and set up project-new:
+```bash
+source ~/.zshrc   # or source ~/.bashrc
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/eypacha/project-new.git
-   ```
+You can now use the `new` command from anywhere in your terminal!
 
-2. Make the script executable:
-   ```bash
-   cd project-new && chmod +x bin/new
-   ```
+---
 
-3. Add the script to your PATH for easier access:
-   
-   For Bash users:
-   ```bash
-   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.bashrc
-   source ~/.bashrc
-   ```
-   
-   For Zsh users:
-   ```bash
-   echo 'export PATH=$PATH:'"$PWD/bin" >> ~/.zshrc
-   source ~/.zshrc
-   ```
+#### Manual install (alternative)
+
+If you prefer, you can follow these steps manually:
+
+```bash
+# 1. Create the bin directory in your home if it doesn't exist
+mkdir -p "$HOME/bin"
+
+# 2. Download the script
+curl -fsSL https://raw.githubusercontent.com/eypacha/project-new/master/bin/new -o "$HOME/bin/new"
+
+# 3. Make it executable
+chmod +x "$HOME/bin/new"
+
+# 4. Add $HOME/bin to your PATH if it's not already there
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc  # or ~/.bashrc
+
+# 5. Reload your shell configuration
+source ~/.zshrc   # or source ~/.bashrc
+```
 
 Now you can use the `new` command from anywhere in your terminal!
 
