@@ -1,0 +1,44 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Temporary files
+*.swp
+*.swo
+*~
+*.tmp
+
+# VS Code
+.vscode/
+
+# Python virtualenv
+venv/
+ENV/
+
+# Logs
+*.log
+
+# Backup files
+*.bak
+
+# User config
+$HOME/.new
+
+# Node modules
+node_modules/
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar
+
+# OS generated files
+Icon?
+
+# Others
+.idea/
