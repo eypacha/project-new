@@ -1,18 +1,32 @@
 #!/bin/bash
 CONFIG_FILE="$HOME/.new"
 
+
 # Verbose mode flag
 VERBOSE=0
+# Editor open flag
+OPEN_EDITOR=""
 
-# Check for verbose flag
-for arg in "$@"; do
-  if [[ "$arg" == "--verbose" || "$arg" == "-v" ]]; then
-    VERBOSE=1
-    # Remove verbose flag from arguments
-    set -- "${@/--verbose}" "${@/-v}"
-    break
-  fi
+# Parse flags
+ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --verbose|-v)
+      VERBOSE=1
+      ;;
+    --open|-o)
+      OPEN_EDITOR="$2"
+      shift
+      ;;
+    *)
+      ARGS+=("$1")
+      ;;
+  esac
+  shift
 done
+
+# Restore positional parameters
+set -- "${ARGS[@]}"
 
 # Declare color variables
 if [[ $TERM == *color* ]]; then
@@ -126,6 +140,7 @@ show_help() {
   printf "  --remove-template  Remove a custom template \n"
   printf "  --update           Update/reinstall project-new script \n"
   printf "  --verbose, -v      Enable verbose mode for detailed output \n"
+  printf "  --open, -o [editor]  Open project in editor after creation (code, cursor, zed, subl, idea, webstorm, phpstorm, pycharm, goland, studio, vim, nvim)\n"
   exit 0
 }
 
@@ -323,13 +338,24 @@ if [[ -f "$CONFIG_FILE" ]]; then
                 cmd_name=$(echo "$command" | awk '{print $1}')
                 check_command "$cmd_name"  # Check if the command exists
             fi
+            # Open in editor if requested
+            if [[ -n "$OPEN_EDITOR" && -n "$APP_NAME" ]]; then
+              case "$OPEN_EDITOR" in
+                code|cursor|zed|subl|idea|webstorm|phpstorm|pycharm|goland|studio|vim|nvim)
+                  cd "$APP_NAME" 2>/dev/null && "$OPEN_EDITOR" .
+                  ;;
+                nano)
+                  cd "$APP_NAME" 2>/dev/null && nano .
+                  ;;
+                *)
+                  echo -e "${YELLOW}Unknown editor: $OPEN_EDITOR${RESET}"
+                  ;;
+              esac
+            fi
             exit 0
         fi
     done < "$CONFIG_FILE"
 fi
-
-
-
 
 ## Execute the command for the project type if it exists
 command=$(get_project_command "$TYPE")
@@ -343,6 +369,20 @@ if [[ -n "$command" ]]; then
       # Extract the command name for error handling
       cmd_name=$(echo "$command" | awk '{print $1}')
       check_command "$cmd_name"  # Check if the command exists
+    fi
+    # Open in editor if requested
+    if [[ -n "$OPEN_EDITOR" && -n "$APP_NAME" ]]; then
+      case "$OPEN_EDITOR" in
+        code|cursor|zed|subl|idea|webstorm|phpstorm|pycharm|goland|studio|vim|nvim)
+          cd "$APP_NAME" 2>/dev/null && "$OPEN_EDITOR" .
+          ;;
+        nano)
+          cd "$APP_NAME" 2>/dev/null && nano .
+          ;;
+        *)
+          echo -e "${YELLOW}Unknown editor: $OPEN_EDITOR${RESET}"
+          ;;
+      esac
     fi
     exit 0
 fi

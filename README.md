@@ -22,10 +22,21 @@ Create a new React app:
 new react my-react-app
 ```
 
+Crear un proyecto y abrirlo en VS Code:
+```
+new react my-react-app --open code
+```
+
+Crear un proyecto y abrirlo en Cursor:
+```
+new react my-react-app -o cursor
+```
+
 Create a new Django project with additional arguments:
 ```
 new vite my-vite-app --template=vue
 ```
+
 
 ### Options
 
@@ -33,6 +44,19 @@ new vite my-vite-app --template=vue
 - `--templates` or `-t`: Show all available project templates
 - `--add-template`: Add or override a custom template
 - `--remove-template`: Remove a custom template
+- `--open` or `-o [editor]`: Open the project in your chosen code editor after creation. Supported editors:
+	- `code` → VS Code: `code .`
+	- `cursor` → Cursor: `cursor .`
+	- `zed` → Zed: `zed .`
+	- `subl` → Sublime: `subl .`
+	- `idea` → IntelliJ: `idea .`
+	- `webstorm` → WebStorm: `webstorm .`
+	- `phpstorm` → PhpStorm: `phpstorm .`
+	- `pycharm` → PyCharm: `pycharm .`
+	- `goland` → GoLand: `goland .`
+	- `studio` → Android Studio: `studio .`
+	- `vim` → Vim: `vim .`
+	- `nvim` → Neovim: `nvim .`
 
 ## Supported Project Types
 
