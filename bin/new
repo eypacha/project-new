@@ -59,7 +59,6 @@ get_project_command() {
     docker)    echo "mkdir [app-name] && cd [app-name] && touch Dockerfile docker-compose.yml";;
     electron)  echo "npx create-electron-app [app-name]";;
     expo)      echo "npx create-expo-app [app-name]";;
-    expo)      echo "npx create-expo-app [app-name]";;
     express)   echo "yarn create express-app [app-name]";;
     fastapi)   echo "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install fastapi uvicorn";;
     fastify)   echo "yarn create fastify [app-name]";;
