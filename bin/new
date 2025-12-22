@@ -61,24 +61,43 @@ if [[ "$1" == "--update" ]]; then
   exit 0
 fi
 
+## List of supported project types
+PROJECT_TYPES=(adonis angular ansible astro bun deno django docker electron expo express fastapi fastify flask gatsby gleam go hono hono-deno ionic koa laravel marko nest next nuxt nx payload phoenix pnpm-lib poem qwik rails react redwood remix rust solid spring svelte sveltekit t3 tauri terraform turborepo vite vue zig)
+
 ## Function to get the command for a project type
 get_project_command() {
   case "$1" in
     adonis)    echo "yarn create adonis-ts-app [app-name]";;
     angular)   echo "ng new [app-name]";;
+    ansible)   echo "ansible-galaxy init [app-name]";;
     astro)     echo "yarn create astro [app-name]";;
+    bun)       echo "bun create [template] [app-name]";;
+    deno)      echo "deno init [app-name]";;
     django)    echo "django-admin startproject [app-name]";;
+    docker)    echo "mkdir [app-name] && cd [app-name] && touch Dockerfile docker-compose.yml";;
+    electron)  echo "npx create-electron-app [app-name]";;
+    expo)      echo "npx create-expo-app [app-name]";;
+    expo)      echo "npx create-expo-app [app-name]";;
     express)   echo "yarn create express-app [app-name]";;
+    fastapi)   echo "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install fastapi uvicorn";;
     fastify)   echo "yarn create fastify [app-name]";;
     flask)     echo "mkdir [app-name] && cd [app-name] && python -m venv venv && source venv/bin/activate && pip install Flask";;
     gatsby)    echo "npx gatsby new [app-name]";;
+    gleam)     echo "gleam new [app-name]";;
+    go)        echo "go mod init [app-name]";;
+    hono-deno) echo "deno run -A npm:create-hono@latest [app-name]";;
     hono)      echo "yarn create hono [app-name]";;
+    ionic)     echo "ionic start [app-name] blank --type=react";;
+    koa)       echo "npx koa-generator [app-name]";;
     laravel)   echo "composer create-project --prefer-dist laravel/laravel [app-name]";;
     marko)     echo "npx create-marko [app-name]";;
     nest)      echo "yarn global add @nestjs/cli && nest new [app-name]";;
     next)      echo "npx create-next-app [app-name]";;
     nuxt)      echo "npx nuxi init";;
+    nx)        echo "npx create-nx-workspace [app-name]";;
     payload)   echo "npx create-payload-app -n [app-name] [arguments...]";;
+    phoenix)   echo "mix phx.new [app-name]";;
+    pnpm-lib)  echo "pnpm init";;
     poem)      echo "mkdir [app-name] && cd [app-name] cargo add poem";;
     qwik)      echo "yarn create qwik [app-name]";;
     rails)     echo "rails new [app-name]";;
@@ -91,8 +110,13 @@ get_project_command() {
     svelte)    echo "npx degit sveltejs/template [app-name]";;
     sveltekit) echo "yarn create svelte [app-name]";;
     t3)        echo "yarn create t3-app [app-name]";;
+    tauri)     echo "npm create tauri-app@latest [app-name]";;
+    terraform) echo "mkdir [app-name] && cd [app-name] && terraform init";;
+    turborepo) echo "npx create-turbo [app-name]";;
     vite)      echo "yarn create vite [app-name]";;
     vue)       echo "vue create [app-name]";;
+    zig)       echo "zig init-exe";;
+    
     *)         echo "";;
   esac
 }
@@ -120,7 +144,7 @@ fi
 ## Function to show available templates
 show_templates() {
   printf "Available templates:\n"
-  for type in adonis angular astro django express fastify flask gatsby hono laravel marko nest next nuxt payload poem rails react redwood remix rust solid spring svelte sveltekit t3 vite vue qwik; do
+  for type in "${PROJECT_TYPES[@]}"; do
     cmd=$(get_project_command "$type")
     command_colored="${cmd}"
     command_colored="${command_colored//\[app-name\]/${COLOR_APP_NAME}[app-name]${COLOR_RESET}}"
