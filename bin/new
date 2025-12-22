@@ -53,7 +53,7 @@ if [[ "$1" == "--update" ]]; then
 fi
 
 ## List of supported project types
-PROJECT_TYPES=(adonis angular ansible astro bun deno django docker electron expo express fastapi fastify flask gatsby gleam go hono hono-deno ionic koa laravel marko nest next nuxt nx payload phoenix pnpm-lib poem qwik rails react redwood remix rust solid spring svelte sveltekit t3 tauri terraform turborepo vite vue zig)
+PROJECT_TYPES=(adonis angular ansible astro bun deno django docker electron expo express fastapi fastify flask gatsby gleam go hono hono-deno ionic koa laravel marko nest next nuxt nx payload phoenix pnpm-lib poem qwik rails react redwood remix rust solid spring strapi svelte sveltekit t3 tanstack tauri terraform turborepo vite vue zig)
 
 ## Function to get the command for a project type
 get_project_command() {
@@ -97,10 +97,12 @@ get_project_command() {
     rust)      echo "cargo new [app-name] [arguments...]";;
     solid)     echo "yarn create solid [app-name]";;
     spring)    echo "curl https://start.spring.io/starter.zip -d dependencies=web -d name=[app-name]";;
+    strapi)    echo "npx create-strapi@latest [app-name] [arguments...]";;
     svelte)    echo "npx degit sveltejs/template [app-name]";;
     sveltekit) echo "yarn create svelte [app-name]";;
     t3)        echo "yarn create t3-app [app-name]";;
     tauri)     echo "npm create tauri-app@latest [app-name]";;
+    tanstack)  echo "npm create @tanstack/start@latest [app-name]";;
     terraform) echo "mkdir [app-name] && cd [app-name] && terraform init";;
     turborepo) echo "npx create-turbo [app-name]";;
     vite)      echo "yarn create vite [app-name]";;
