@@ -226,14 +226,51 @@ check_command() {
         cargo)
           printf "Installing Rust and Cargo...\n"
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-          printf "Please add \$HOME/.cargo/bin to your PATH.\n"
+          printf "Please add $HOME/.cargo/bin to your PATH.\n"
           ;;
         composer)
           printf "Installing Composer...\n"
           curl -sS https://getcomposer.org/installer | php
           mv composer.phar /usr/local/bin/composer
           ;;
-        # Add other commands as needed
+        deno)
+          printf "Installing Deno...\n"
+          curl -fsSL https://deno.land/install.sh | sh
+          printf "Please add $HOME/.deno/bin to your PATH.\n"
+          ;;
+        go)
+          printf "Please install Go from https://golang.org/dl/\n"
+          ;;
+        python)
+          printf "Please install Python from https://www.python.org/downloads/\n"
+          ;;
+        pip)
+          printf "Please install pip: python -m ensurepip --upgrade\n"
+          ;;
+        npx)
+          printf "Please install Node.js (includes npx) from https://nodejs.org/\n"
+          ;;
+        npm)
+          printf "Please install Node.js (includes npm) from https://nodejs.org/\n"
+          ;;
+        yarn)
+          printf "Installing Yarn...\n"
+          npm install -g yarn
+          ;;
+        pnpm)
+          printf "Installing pnpm...\n"
+          npm install -g pnpm
+          ;;
+        vue)
+          printf "Installing Vue CLI...\n"
+          npm install -g @vue/cli
+          ;;
+        mix)
+          printf "Please install Elixir and Phoenix: https://hexdocs.pm/phoenix/installation.html\n"
+          ;;
+        mkdir|touch|cd|echo|printf|sed|awk|curl|chmod)
+          printf "${YELLOW}This is a standard Unix command. Please ensure your system shell is working correctly.${RESET}\n"
+          ;;
         *)
           printf "${RED}No installation script available for '%s'. Please install it manually.${RESET}\n" "$1"
           ;;
