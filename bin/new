@@ -131,7 +131,7 @@ show_templates() {
     command_colored="${cmd}"
     command_colored="${command_colored//\[app-name\]/${CYAN}[app-name]${RESET}}"
     command_colored="${command_colored//\[arguments...\]/${MAGENTA}[arguments...]${RESET}}"
-    printf "%b%b%b%b%b\n" "${YELLOW}$type${RESET}" "${MAGENTA} = ${RESET}" "${COLOR_COMMAND}" "$command_colored" "${RESET}"
+      printf "%b%b%b%b\n" "${YELLOW}$type${RESET}" "${MAGENTA} = ${RESET}" "$command_colored" "${RESET}"
   done
 
   if [[ -f "$CONFIG_FILE" ]]; then
@@ -140,7 +140,8 @@ show_templates() {
         printf "\nUser-defined templates:\n"
         while IFS=: read -r user_template_name user_command; do
             user_command_colored="${user_command//\[app-name\]/${CYAN}[app-name]${RESET}}"
-            printf "%b%b%b%b%b\n" "${YELLOW}$user_template_name${RESET}" "${MAGENTA}=${RESET}" "${COLOR_COMMAND}" "$user_command_colored" "${RESET}"
+            user_command_colored="${user_command_colored//\[arguments...\]/${MAGENTA}[arguments...]${RESET}}"
+            printf "%b%b%b%b\n" "${YELLOW}$user_template_name${RESET}" "${MAGENTA} = ${RESET}" "$user_command_colored" "${RESET}"
         done < "$CONFIG_FILE"
     fi
   fi
